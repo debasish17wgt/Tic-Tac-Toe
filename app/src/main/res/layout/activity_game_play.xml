@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:padding="10dp"
+    tools:context=".view.GamePlayActivity">
+
+    <!--game player layout-->
+    <LinearLayout
+        android:id="@+id/layout_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/game_board_bg_dark"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Player 1"
+            android:textColor="@color/silver"
+            android:textSize="@dimen/text_extra_medium" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="VS."
+            android:textColor="@color/silver"
+            android:textSize="@dimen/text_large" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Player 2"
+            android:textColor="@color/silver"
+            android:textSize="@dimen/text_extra_medium" />
+    </LinearLayout>
+
+    <!--game board-->
+    <LinearLayout
+        android:id="@+id/layout_game_board"
+        android:layout_width="@dimen/game_board_width"
+        android:layout_height="@dimen/game_board_height"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <!--row 1-->
+        <LinearLayout
+            android:id="@+id/row_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/game_cell_height">
+
+            <ImageView
+                android:id="@+id/cell_00"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding"
+                android:src="@drawable/ic_o_l" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_01"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding"
+                android:src="@drawable/ic_x_l" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_02"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+        </LinearLayout>
+
+        <!--HR line 1-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/game_board_border"
+            android:background="@color/yellow" />
+
+        <!--row 2-->
+        <LinearLayout
+            android:id="@+id/row_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/game_cell_height">
+
+            <ImageView
+                android:id="@+id/cell_10"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_11"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_12"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+        </LinearLayout>
+
+        <!--HR line 2-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/game_board_border"
+            android:background="@color/yellow" />
+
+        <!--row 3-->
+        <LinearLayout
+            android:id="@+id/row_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/game_cell_height">
+
+            <ImageView
+                android:id="@+id/cell_20"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_21"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+
+            <View
+                android:layout_width="@dimen/game_board_border"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <ImageView
+                android:id="@+id/cell_22"
+                android:layout_width="@dimen/game_cell_width"
+                android:layout_height="@dimen/game_cell_height"
+                android:padding="@dimen/game_cell_padding" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
