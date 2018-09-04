@@ -54,9 +54,10 @@ public class GamePlayViewModel extends AndroidViewModel {
             cells.put(stringFromNumbers(row, column), game.currentPlayer.value.equalsIgnoreCase("x")
                     ? context.getResources().getDrawable(R.drawable.ic_x_l)
                     : context.getResources().getDrawable(R.drawable.ic_o_l));
-            if (game.hasGameEnded())
-                game.reset();
-            else
+            if (game.hasGameEnded()) {
+                game.reset(); //clear game's data individually
+                //resetBoard();
+            } else
                 game.switchPlayer();
         }
     }
@@ -64,6 +65,12 @@ public class GamePlayViewModel extends AndroidViewModel {
     public LiveData<Player> getWinner() {
         return game.winner;
     }
+
+    /*private void resetBoard() {
+        cells.clear(); //clear cells(view)
+        game = null;
+        game = new Game("Ajit", "Deba");
+    }*/
 
 
 }

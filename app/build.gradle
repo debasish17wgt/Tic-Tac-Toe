@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
     // ViewModel and LiveData
@@ -35,4 +36,9 @@ dependencies {
 
     // optional - ReactiveStreams support for LiveData
     implementation "android.arch.lifecycle:reactivestreams:1.1.1"
+
+    //firebase db
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

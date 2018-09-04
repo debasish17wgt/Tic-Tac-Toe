@@ -35,7 +35,7 @@ public class GamePlayActivity extends AppCompatActivity {
 
     private void setupWinnerObserver() {
         viewModel.getWinner().observe(this, player -> {
-            Toast.makeText(this, player.name + " wins", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, (player == null ? "No one" : player.name) + " wins", Toast.LENGTH_SHORT).show();
         });
     }
 }
