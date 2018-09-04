@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <stroke android:color="@color/yellow" android:width="@dimen/login_area_border"/>
+    <corners android:radius="@dimen/game_board_corner"/>
+
+</shape>

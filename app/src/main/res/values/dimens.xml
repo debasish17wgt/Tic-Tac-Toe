@@ -16,4 +16,6 @@
     <dimen name="game_cell_width">60dp</dimen>
     <dimen name="game_cell_padding">10dp</dimen>
 
+    <dimen name="login_area_border">2dp</dimen>
+
 </resources>

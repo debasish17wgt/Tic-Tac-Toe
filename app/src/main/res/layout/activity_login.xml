@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.wgt.tictactoe.viewmodel.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        tools:context=".view.LoginActivity">
+
+        <LinearLayout
+            android:id="@+id/layout_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_login_dark">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Email"
+                android:text="@={viewModel.email}"
+                android:textColor="@color/silver"
+                android:textColorHint="@color/silver"
+                android:textSize="@dimen/text_medium"
+                android:theme="@style/MyEditTextStyle" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Name"
+                android:text="@={viewModel.name}"
+                android:textColor="@color/silver"
+                android:textColorHint="@color/silver"
+                android:textSize="@dimen/text_medium"
+                android:theme="@style/MyEditTextStyle" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:onClick="@{()->viewModel.onLoginClicked()}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_medium" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}"/>
+
+    </RelativeLayout>
+</layout>
