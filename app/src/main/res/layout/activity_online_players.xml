@@ -15,16 +15,35 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
         tools:context=".view.OnlinePlayersActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Online Players"
+            android:textColor="@color/silver"
+            android:textSize="@dimen/text_extra_medium" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorAccent" />
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}"/>
+            android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}" />
 
-
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_online_Players"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

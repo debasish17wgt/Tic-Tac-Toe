@@ -8,4 +8,17 @@ public class Constant {
         String REQUESTS_SEND = "requests_send";
         String GAMES = "active_games";
     }
+
+    public interface PREFERENCE {
+        String USER_FILE = "user_data";
+
+        String USER_NAME = "user_name";
+        String USER_EMAIL = "user_email";
+        String USER_FDB_KEY = "user_fdb_key";
+    }
+
+    public interface INTENT {
+        String GAME_ID = "game_id";
+        String IS_FIRST_PLAYER = "is_first_player";
+    }
 }

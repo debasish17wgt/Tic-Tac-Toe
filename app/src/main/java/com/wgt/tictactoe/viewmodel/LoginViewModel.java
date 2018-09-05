@@ -43,16 +43,18 @@ public class LoginViewModel extends ViewModel {
 
     public void onLoginClicked() {
         isLoading.set(true);
-        /*String key = databaseReference.child(Constant.DATABASE.ONLINE_USERS).push().getKey();
-        databaseReference.child(Constant.DATABASE.ONLINE_USERS+"/"+key).setValue(user)
+        String key = databaseReference.child(Constant.DATABASE.ONLINE_USERS).push().getKey();
+        databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + key).setValue(user)
                 .addOnSuccessListener(aVoid -> {
+                    user.setFdbKey(key);
                     isLoading.set(false);
+                    isLoggedin.setValue(true);
                 })
                 .addOnFailureListener(e -> {
                     isLoading.set(false);
-
-                });*/
-        databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + user.getEmail()).setValue(user.getName())
+                    isLoggedin.setValue(false);
+                });
+        /*databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + user.getEmail()).setValue(user.getName())
                 .addOnSuccessListener(aVoid -> {
                     isLoading.set(false);
                     isLoggedin.setValue(true);
@@ -61,10 +63,11 @@ public class LoginViewModel extends ViewModel {
                     isLoading.set(false);
                     isLoggedin.setValue(false);
                 });
-
+*/
     }
 
     public LiveData<Boolean> getLoginStatus() {
         return isLoggedin;
     }
+
 }
