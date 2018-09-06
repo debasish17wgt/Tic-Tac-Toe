@@ -126,6 +126,7 @@ public class OnlinePlayersActivity extends AppCompatActivity implements OnlineUs
             //open Game request dialog
             AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
             builder.setTitle("Game Request")
                     .setMessage(gameRequest.getSenderName().toUpperCase() + " wants to play with you" + "\nPlay?")
                     .setPositiveButton("Play", (dialog, which) -> {

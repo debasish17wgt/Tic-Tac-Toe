@@ -20,8 +20,10 @@ import com.wgt.tictactoe.model.GameRequest;
 import com.wgt.tictactoe.model.User;
 import com.wgt.tictactoe.preference.UserCredPref;
 import com.wgt.tictactoe.util.Constant;
+import com.wgt.tictactoe.util.Helper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,7 +119,7 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
         if (email != null) {
             gameRef = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.GAMES);
             String gameID = gameRef.push().getKey();
-            gameRef.child(gameID).setValue(new FGame(localUser.getEmail(), receiverPlayer.getEmail(), "", "", false));
+            gameRef.child(gameID).setValue(new FGame(localUser.getEmail(), receiverPlayer.getEmail(), "", "", false, Helper.getEmptyCell(3, 3)));
 
             DatabaseReference requestSendRef = FirebaseDatabase.getInstance()
                     .getReference(Constant.DATABASE.DATABASE_NAME)
@@ -136,6 +138,7 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
         }
 
     }
+
 
     private void listenForAcceptedGame(String gameID) {
         gameRef = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.GAMES).child(gameID).child("accepted");
@@ -179,9 +182,13 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
             return;
         }
         List<User> temp = new ArrayList<>();
+        User user = new UserCredPref(context).getUserDetails();
 
         for (Map.Entry<String, Object> entry : value.entrySet()) {
             Map singleUser = (Map) entry.getValue();
+            if (((String) singleUser.get("email")).equals(user.getEmail())) {
+                continue;
+            }
             temp.add(new User((String) singleUser.get("name"), (String) singleUser.get("email")));
         }
         users.setValue(temp);

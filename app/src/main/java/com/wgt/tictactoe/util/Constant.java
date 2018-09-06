@@ -6,7 +6,7 @@ public class Constant {
         String ONLINE_USERS = "online_users";
         String REQUESTS_GET = "requests_get";
         String REQUESTS_SEND = "requests_send";
-        String GAMES = "active_games";
+        String GAMES = "games";
     }
 
     public interface PREFERENCE {

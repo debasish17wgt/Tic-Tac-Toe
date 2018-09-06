@@ -2,22 +2,26 @@ package com.wgt.tictactoe.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.Map;
+
 public class FGame {
 
     private String player1, player2;
     private String currentPlayer;
     private String winner;
     private boolean accepted;
+    private Map<String, String> cell;
 
     public FGame() {
     }
 
-    public FGame(String player1, String player2, String currentPlayer, String winner, boolean accepted) {
+    public FGame(String player1, String player2, String currentPlayer, String winner, boolean accepted, Map<String, String> cell) {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = currentPlayer;
         this.winner = winner;
         this.accepted = accepted;
+        this.cell = cell;
     }
 
     public String getPlayer1() {
@@ -58,5 +62,13 @@ public class FGame {
 
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public Map<String, String> getCell() {
+        return cell;
+    }
+
+    public void setCell(Map<String, String> cell) {
+        this.cell = cell;
     }
 }
