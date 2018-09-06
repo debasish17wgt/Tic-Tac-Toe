@@ -10,7 +10,7 @@
             type="com.wgt.tictactoe.viewmodel.OnlinePlayersViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -20,30 +20,50 @@
         tools:context=".view.OnlinePlayersActivity">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:gravity="center"
             android:text="Online Players"
             android:textColor="@color/silver"
             android:textSize="@dimen/text_extra_medium" />
 
         <View
+            android:id="@+id/hr_bar"
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:layout_below="@id/tv_title"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@color/colorAccent" />
 
         <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/hr_bar"
             android:layout_gravity="center"
             android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_online_Players"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_above="@id/btn_logout"
+            android:layout_below="@id/progress" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/silver"
+            android:text="LOGOUT"
+            android:onClick="@{()->viewModel.logout()}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_extra_medium"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </layout>

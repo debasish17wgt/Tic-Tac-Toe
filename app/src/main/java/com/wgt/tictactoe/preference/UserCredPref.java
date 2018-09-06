@@ -30,4 +30,11 @@ public class UserCredPref {
                 preferences.getString(Constant.PREFERENCE.USER_FDB_KEY, null)
         );
     }
+
+    public void logout() {
+        editor.putString(Constant.PREFERENCE.USER_NAME, null);
+        editor.putString(Constant.PREFERENCE.USER_EMAIL, null);
+        editor.putString(Constant.PREFERENCE.USER_FDB_KEY, null);
+        editor.apply();
+    }
 }

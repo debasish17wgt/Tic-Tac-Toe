@@ -1,6 +1,11 @@
 package com.wgt.tictactoe.model;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import com.google.firebase.database.Exclude;
+
+import java.util.regex.Pattern;
 
 public class User {
     private String name, email, fdbKey;
@@ -44,5 +49,18 @@ public class User {
     @Exclude
     public void setFdbKey(String fdbKey) {
         this.fdbKey = fdbKey;
+    }
+
+    @Exclude
+    public boolean isValid() {
+        return name != null && email != null && fdbKey != null;
+    }
+
+    @Exclude
+    public boolean isValidForLogin() {
+        return name != null
+                && email != null
+                && name.length() >= 3
+                && email.length() >= 5;
     }
 }

@@ -29,7 +29,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email"
+                android:hint="Enter Username"
                 android:text="@={viewModel.email}"
                 android:textColor="@color/silver"
                 android:textColorHint="@color/silver"
@@ -55,7 +55,8 @@
                 android:textAllCaps="false"
                 android:onClick="@{()->viewModel.onLoginClicked()}"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_medium" />
+                android:textSize="@dimen/text_medium"
+                android:enabled="@{!viewModel.isLoading}"/>
         </LinearLayout>
 
         <ProgressBar

@@ -1,10 +1,8 @@
 package com.wgt.tictactoe.view;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -32,15 +30,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void listenForLogin() {
+        //validate msg
+        viewModel.getLoginMsg().observe(this, msg -> {
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        });
+
         viewModel.getLoginStatus().observe(this, status -> {
             if (status) {
-                Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                 //save user data
                 userCredPref.saveData(viewModel.getUser());
 
                 //go to online player activity
                 startActivity(new Intent(LoginActivity.this, OnlinePlayersActivity.class));
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }

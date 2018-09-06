@@ -15,6 +15,7 @@ public class LoginViewModel extends ViewModel {
     private DatabaseReference databaseReference;
     public ObservableBoolean isLoading = new ObservableBoolean();
     private MutableLiveData<Boolean> isLoggedin = new MutableLiveData<>();
+    private MutableLiveData<String> loginMsg = new MutableLiveData<>();
 
     public LoginViewModel() {
         user = new User();
@@ -42,18 +43,25 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void onLoginClicked() {
-        isLoading.set(true);
-        String key = databaseReference.child(Constant.DATABASE.ONLINE_USERS).push().getKey();
-        databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + key).setValue(user)
-                .addOnSuccessListener(aVoid -> {
-                    user.setFdbKey(key);
-                    isLoading.set(false);
-                    isLoggedin.setValue(true);
-                })
-                .addOnFailureListener(e -> {
-                    isLoading.set(false);
-                    isLoggedin.setValue(false);
-                });
+        if (user.isValidForLogin()) {
+            isLoading.set(true);
+            String key = databaseReference.child(Constant.DATABASE.ONLINE_USERS).push().getKey();
+            databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + key).setValue(user)
+                    .addOnSuccessListener(aVoid -> {
+                        user.setFdbKey(key);
+                        isLoading.set(false);
+                        isLoggedin.setValue(true);
+                    })
+                    .addOnFailureListener(e -> {
+                        isLoading.set(false);
+                        isLoggedin.setValue(false);
+                    });
+        } else {
+            loginMsg.setValue("username should be min. 5 characters\nusername should be min. 3 characters.");
+        }
+
+
+
         /*databaseReference.child(Constant.DATABASE.ONLINE_USERS + "/" + user.getEmail()).setValue(user.getName())
                 .addOnSuccessListener(aVoid -> {
                     isLoading.set(false);
@@ -68,6 +76,10 @@ public class LoginViewModel extends ViewModel {
 
     public LiveData<Boolean> getLoginStatus() {
         return isLoggedin;
+    }
+
+    public LiveData<String> getLoginMsg() {
+        return loginMsg;
     }
 
 }

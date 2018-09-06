@@ -43,6 +43,8 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
     private MutableLiveData<GameRequest> gameRequest = new MutableLiveData<>();
     private MutableLiveData<String> acceptedGame = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> isLogedOut = new MutableLiveData<>();
+
     private Context context;
 
     public OnlinePlayersViewModel(@NonNull Application application) {
@@ -63,8 +65,8 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
             requestGetRef = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.REQUESTS_GET + "/" + email);
 
             //add empty request to check
-            //TODO : remove this line.. this is for test purpose
-            requestGetRef.setValue(new GameRequest(user.getName(), user.getEmail(), "", "", ""));
+            //remove this line.. this is for test purpose
+            //requestGetRef.setValue(new GameRequest(user.getName(), user.getEmail(), "", "", ""));
 
             //create request get event listener
             requestGetEventListener = new ValueEventListener() {
@@ -76,7 +78,7 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    //databaseError.toException().printStackTrace();
                 }
             };
 
@@ -85,11 +87,25 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
         }
     }
 
-    public void acceptGameRequest(String gameID) {
+    public void acceptGameRequest(String gameID, String receiverEmail) {
+        //accept particular game request
         DatabaseReference acceptRef = FirebaseDatabase.getInstance()
                 .getReference(Constant.DATABASE.DATABASE_NAME)
                 .child(Constant.DATABASE.GAMES).child(gameID).child("accepted");
         acceptRef.setValue(true);
+
+        //delete senders's articular request from "request_get"
+        // otherwise it will again send that request
+        deleteGameRequest(receiverEmail);
+
+    }
+
+
+    public void deleteGameRequest(String receiverEmail) {
+        DatabaseReference requestRef = FirebaseDatabase.getInstance()
+                .getReference(Constant.DATABASE.DATABASE_NAME)
+                .child(Constant.DATABASE.REQUESTS_GET).child(receiverEmail);
+        requestRef.setValue(null);
     }
 
 
@@ -159,6 +175,9 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
     }
 
     private void collectData(Map<String, Object> value) {
+        if (value == null) {
+            return;
+        }
         List<User> temp = new ArrayList<>();
 
         for (Map.Entry<String, Object> entry : value.entrySet()) {
@@ -185,5 +204,14 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
 
     public LiveData<String> getAcceptedGame() {
         return acceptedGame;
+    }
+
+    public LiveData<Boolean> getLogedOut() {
+        return isLogedOut;
+    }
+
+    public void logout() {
+        new UserCredPref(context).logout();
+        isLogedOut.setValue(true);
     }
 }
