@@ -2,10 +2,12 @@ package com.wgt.tictactoe.model;
 
 
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.Keep;
 import android.util.Log;
 
 import static com.wgt.tictactoe.util.StringUtility.isNullOrEmpty;
 
+@Keep
 public class Game {
 
     private static final String TAG = Game.class.getSimpleName();

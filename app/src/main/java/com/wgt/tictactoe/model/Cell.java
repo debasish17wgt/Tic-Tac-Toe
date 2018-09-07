@@ -1,7 +1,10 @@
 package com.wgt.tictactoe.model;
 
+import android.support.annotation.Keep;
+
 import com.wgt.tictactoe.util.StringUtility;
 
+@Keep
 public class Cell {
 
     public Player player;

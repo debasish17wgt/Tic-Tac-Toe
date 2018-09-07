@@ -57,7 +57,7 @@ public class LoginViewModel extends ViewModel {
                         isLoggedin.setValue(false);
                     });
         } else {
-            loginMsg.setValue("username should be min. 5 characters\nusername should be min. 3 characters.");
+            loginMsg.setValue("username should be min. 5 characters\nName should be min. 3 characters.");
         }
 
 
