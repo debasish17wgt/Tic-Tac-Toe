@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wgt.tictactoe.model.FGame;
 import com.wgt.tictactoe.model.GameRequest;
+import com.wgt.tictactoe.model.Player;
 import com.wgt.tictactoe.model.User;
 import com.wgt.tictactoe.preference.UserCredPref;
 import com.wgt.tictactoe.util.Constant;
@@ -119,7 +120,15 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
         if (email != null) {
             gameRef = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.GAMES);
             String gameID = gameRef.push().getKey();
-            gameRef.child(gameID).setValue(new FGame(localUser.getEmail(), receiverPlayer.getEmail(), "", "", false, Helper.getEmptyCell(3, 3)));
+            gameRef.child(gameID)
+                    .setValue(new FGame(
+                            new User(localUser.getName(), localUser.getEmail()),
+                            new User(receiverPlayer.getName(), receiverPlayer.getEmail()),
+                            "",
+                            new Player("","",""),
+                            false,
+                            Helper.getEmptyCell(3, 3))
+                    );
 
             DatabaseReference requestSendRef = FirebaseDatabase.getInstance()
                     .getReference(Constant.DATABASE.DATABASE_NAME)
