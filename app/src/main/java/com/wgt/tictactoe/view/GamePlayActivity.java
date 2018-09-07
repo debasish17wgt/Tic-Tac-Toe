@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wgt.tictactoe.R;
 import com.wgt.tictactoe.databinding.ActivityGamePlayBinding;
+import com.wgt.tictactoe.model.Player;
 import com.wgt.tictactoe.util.Constant;
 import com.wgt.tictactoe.viewmodel.GamePlayViewModel;
 
@@ -54,11 +55,13 @@ public class GamePlayActivity extends AppCompatActivity {
         gameWinnerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String winner = dataSnapshot.getValue(String.class);
+                Player winner = dataSnapshot.getValue(Player.class);
 
-                if (winner != null && !winner.equals("")) {
+                if (winner != null && !winner.name.equals("")) {
 
-                    String winnerMsg = winner.equals("com.debd.kgp.tictactoe") ? "No one wins!!" : "The winner is " + winner.toUpperCase();
+                    String winnerMsg = winner.name.equals("com.debd.kgp.tictactoe")
+                            ? "No one wins!!"
+                            : "The winner is " + winner.visibleName.toUpperCase() + " (" + winner.name + ")";
 
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(GamePlayActivity.this);
@@ -85,9 +88,9 @@ public class GamePlayActivity extends AppCompatActivity {
                 viewModel.getWinner().observe(this, player -> {
                     //Toast.makeText(this, (player == null ? "No one" : player.name) + " wins", Toast.LENGTH_SHORT).show();
                     if (player == null) {
-                        gameWinnerRef.setValue("com.debd.kgp.tictactoe");
+                        gameWinnerRef.setValue(new Player("com.debd.kgp.tictactoe", "", ""));
                     } else {
-                        gameWinnerRef.setValue(player.name);
+                        gameWinnerRef.setValue(player);
                     }
                 });
             }

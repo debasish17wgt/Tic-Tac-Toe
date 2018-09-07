@@ -54,7 +54,7 @@ public class GamePlayViewModel extends AndroidViewModel {
     /*initialize players*/
     public void init(String gameID, boolean isFirstPlayer) {
         isWaitingForGameInit.set(true);
-        game = new Game("", "");
+        //game = new Game("", "");
         player1Name.set("");
         player2Name.set("");
         initGame(gameID, isFirstPlayer);
@@ -73,12 +73,12 @@ public class GamePlayViewModel extends AndroidViewModel {
                 if (dataSnapshot != null) {
                     FGame fGame = dataSnapshot.getValue(FGame.class);
 
-                    //init game object with player names
+                    //init game object with player's username
                     game = new Game(fGame.getPlayer1(), fGame.getPlayer2());
 
-                    //plaer name setter
-                    player1Name.set(fGame.getPlayer1());
-                    player2Name.set(fGame.getPlayer2());
+                    //player name setter
+                    player1Name.set(fGame.getPlayer1().getName());
+                    player2Name.set(fGame.getPlayer2().getName());
 
                     //init whos turn
                     initWhosTurn(isFirstPlayer);

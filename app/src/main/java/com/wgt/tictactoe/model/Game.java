@@ -19,10 +19,10 @@ public class Game {
 
     public MutableLiveData<Player> winner = new MutableLiveData<>();
 
-    public Game(String playerOne, String playerTwo) {
+    public Game(User playerOne, User playerTwo) {
         cells = new Cell[BOARD_SIZE][BOARD_SIZE];
-        player1 = new Player(playerOne, "x");
-        player2 = new Player(playerTwo, "o");
+        player1 = new Player(playerOne.getEmail(), playerOne.getName(), "x");
+        player2 = new Player(playerTwo.getEmail(), playerTwo.getName(), "o");
         currentPlayer = player1;
     }
 

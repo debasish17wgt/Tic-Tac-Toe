@@ -6,16 +6,16 @@ import java.util.Map;
 
 public class FGame {
 
-    private String player1, player2;
+    private User player1, player2;
     private String currentPlayer;
-    private String winner;
+    private Player winner;
     private boolean accepted;
     private Map<String, String> cell;
 
     public FGame() {
     }
 
-    public FGame(String player1, String player2, String currentPlayer, String winner, boolean accepted, Map<String, String> cell) {
+    public FGame(User player1, User player2, String currentPlayer, Player winner, boolean accepted, Map<String, String> cell) {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = currentPlayer;
@@ -24,19 +24,19 @@ public class FGame {
         this.cell = cell;
     }
 
-    public String getPlayer1() {
+    public User getPlayer1() {
         return player1;
     }
 
-    public void setPlayer1(String player1) {
+    public void setPlayer1(User player1) {
         this.player1 = player1;
     }
 
-    public String getPlayer2() {
+    public User getPlayer2() {
         return player2;
     }
 
-    public void setPlayer2(String player2) {
+    public void setPlayer2(User player2) {
         this.player2 = player2;
     }
 
@@ -48,11 +48,11 @@ public class FGame {
         this.currentPlayer = currentPlayer;
     }
 
-    public String getWinner() {
+    public Player getWinner() {
         return winner;
     }
 
-    public void setWinner(String winner) {
+    public void setWinner(Player winner) {
         this.winner = winner;
     }
 
