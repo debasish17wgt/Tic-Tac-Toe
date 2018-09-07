@@ -46,8 +46,6 @@ public class GamePlayActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No gameID found. Please go back.", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void setupWinnerObserver(String gameID) {
