@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -75,16 +76,9 @@ public class OnlinePlayersActivity extends AppCompatActivity implements OnlineUs
     @Override
     protected void onStop() {
         super.onStop();
-
-        User user = new UserCredPref(this).getUserDetails();
-
-        //delete user from online users data tree
-        DatabaseReference onlineUsersTree = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.ONLINE_USERS);
-        String key = user.getFdbKey();
-        if (key != null) {
-            onlineUsersTree.child(key).setValue(null);
-        }
+        removeFromOnlineList();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -96,15 +90,46 @@ public class OnlinePlayersActivity extends AppCompatActivity implements OnlineUs
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> isBackPressed = false, 2000);
+    }
 
+    private void removeFromOnlineList() {
+
+        User user = new UserCredPref(this).getUserDetails();
+
+        //delete user from online users data tree
+        DatabaseReference onlineUsersTree = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.ONLINE_USERS);
+        String key = user.getFdbKey();
+        if (key != null) {
+            onlineUsersTree.child(key).setValue(null);
+        }
+    }
+
+    private class LogoutAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            removeFromOnlineList();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            new UserCredPref(OnlinePlayersActivity.this).logout();
+
+            Intent intent = new Intent(OnlinePlayersActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
     }
 
     private void listenForLogOut() {
         viewModel.getLogedOut().observe(this, status -> {
             if (status) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                new LogoutAsync().execute();
             }
         });
     }

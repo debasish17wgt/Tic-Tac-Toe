@@ -227,7 +227,6 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
     }
 
     public void logout() {
-        new UserCredPref(context).logout();
         isLogedOut.setValue(true);
     }
 }
