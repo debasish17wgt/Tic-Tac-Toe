@@ -119,7 +119,15 @@ public class OnlinePlayersViewModel extends AndroidViewModel {
         if (email != null) {
             gameRef = FirebaseDatabase.getInstance().getReference(Constant.DATABASE.DATABASE_NAME).child(Constant.DATABASE.GAMES);
             String gameID = gameRef.push().getKey();
-            gameRef.child(gameID).setValue(new FGame(localUser.getEmail(), receiverPlayer.getEmail(), "", "", false, Helper.getEmptyCell(3, 3)));
+            gameRef.child(gameID)
+                    .setValue(new FGame(
+                            localUser.getName(),
+                            receiverPlayer.getName(),
+                            "",
+                            "",
+                            false,
+                            Helper.getEmptyCell(3, 3))
+                    );
 
             DatabaseReference requestSendRef = FirebaseDatabase.getInstance()
                     .getReference(Constant.DATABASE.DATABASE_NAME)
