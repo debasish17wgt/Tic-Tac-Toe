@@ -1,9 +1,12 @@
 package com.wgt.tictactoe.model;
 
+import android.support.annotation.Keep;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.Map;
 
+@Keep
 public class FGame {
 
     private User player1, player2;

@@ -1,6 +1,8 @@
 package com.wgt.tictactoe.model;
 
+import android.support.annotation.Keep;
 
+@Keep
 public class Player {
 
     public String name;

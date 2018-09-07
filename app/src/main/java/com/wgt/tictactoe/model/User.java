@@ -1,5 +1,6 @@
 package com.wgt.tictactoe.model;
 
+import android.support.annotation.Keep;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -7,6 +8,7 @@ import com.google.firebase.database.Exclude;
 
 import java.util.regex.Pattern;
 
+@Keep
 public class User {
     private String name, email, fdbKey;
 

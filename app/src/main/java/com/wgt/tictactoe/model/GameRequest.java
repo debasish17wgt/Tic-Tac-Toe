@@ -1,5 +1,8 @@
 package com.wgt.tictactoe.model;
 
+import android.support.annotation.Keep;
+
+@Keep
 public class GameRequest {
     private String senderName, senderEmail, receiverName, receiverEmail, gameID;
 
